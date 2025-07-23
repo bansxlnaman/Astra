@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astra Tatkal Booking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .form-section {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal-backdrop:not(.hidden) .modal-content {
+            transform: scale(1);
+        }
+        #submit-button:disabled {
+            background-color: #93c5fd;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="min-h-screen container mx-auto px-4 py-8">
+        <header class="text-center mb-8">
+            <div class="flex justify-center items-center gap-4">
+                <svg class="h-12 w-12 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                </svg>
+                <h1 class="text-4xl font-bold text-gray-800">Astra Tatkal Booking</h1>
+            </div>
+            <p class="text-gray-500 mt-2">A demonstration of real-time bot detection.</p>
+        </header>
+
+        <main class="max-w-3xl mx-auto">
+            <!-- Demonstration Info Box -->
+            <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded-lg mb-6" role="alert">
+              <p class="font-bold">How to Demonstrate</p>
+              <p>🤖 <span class="font-semibold">To simulate a BOT:</span> Fill the form as fast as possible and click submit.</p>
+              <p>👤 <span class="font-semibold">To simulate a HUMAN:</span> Take your time, move the mouse around, and fill the form at a normal pace.</p>
+            </div>
+
+            <!-- Journey Planner Section -->
+            <div class="form-section">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-semibold text-gray-700">Plan My Journey</h2>
+                    <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">TATKAL</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="from-station" class="block text-sm font-medium text-gray-600">From</label>
+                        <input type="text" id="from-station" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 bg-gray-100" value="New Delhi - NDLS" readonly>
+                    </div>
+                    <div>
+                        <label for="to-station" class="block text-sm font-medium text-gray-600">To</label>
+                        <input type="text" id="to-station" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 bg-gray-100" value="Mumbai Central - BCT" readonly>
+                    </div>
+                </div>
+                <div class="mt-4 p-3 bg-gray-50 rounded-lg border">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="font-bold text-lg text-gray-800">12952 - MUMBAI DURONTO</p>
+                            <p class="text-sm text-gray-500">Departs: 23:25 | Arrives: 15:55</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-semibold text-green-600">AVAILABLE-0064</p>
+                            <p class="text-sm text-gray-500">AC 3 Tier (3A)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Passenger Details Section -->
+            <div id="passenger-details-section" class="form-section">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Passenger Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="md:col-span-2">
+                        <label for="passenger-name" class="block text-sm font-medium text-gray-600">Name</label>
+                        <input type="text" id="passenger-name" placeholder="Enter passenger name" class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="passenger-age" class="block text-sm font-medium text-gray-600">Age</label>
+                        <input type="number" id="passenger-age" placeholder="e.g., 28" class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CAPTCHA Section -->
+            <div id="captcha-section" class="form-section">
+                 <h2 class="text-2xl font-semibold text-gray-700 mb-4">CAPTCHA Verification</h2>
+                 <div class="flex items-center gap-4 bg-gray-100 p-3 rounded-lg">
+                    <div class="bg-gray-800 text-white font-mono text-2xl tracking-widest px-4 py-2 rounded-md select-none" style="text-decoration: line-through; text-decoration-color: #9ca3af;">
+                        <span id="captcha-text" class="opacity-75"></span>
+                    </div>
+                    <input type="text" id="captcha-input" placeholder="Enter CAPTCHA" class="form-input block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                 </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mt-8">
+                <button id="submit-button" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300" disabled>
+                    Proceed to Payment
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="processing-modal" class="modal-backdrop hidden">
+        <div class="modal-content">
+            <svg class="animate-spin h-12 w-12 text-blue-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <h3 class="text-xl font-semibold mt-4 text-gray-800">Processing...</h3>
+            <p class="text-gray-500 mt-1">Analyzing session behavior.</p>
+        </div>
+    </div>
+
+    <div id="success-modal" class="modal-backdrop hidden">
+        <div class="modal-content">
+            <svg class="h-16 w-16 text-green-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h3 class="text-xl font-semibold mt-4 text-green-700">Payment Successful</h3>
+            <p class="text-gray-500 mt-1">Your ticket has been booked. Session approved as Human.</p>
+            <button onclick="resetForm()" class="mt-6 w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg">New Booking</button>
+        </div>
+    </div>
+
+    <div id="blocked-modal" class="modal-backdrop hidden">
+        <div class="modal-content">
+            <svg class="h-16 w-16 text-red-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+            </svg>
+            <h3 class="text-xl font-semibold mt-4 text-red-700">Transaction Blocked</h3>
+            <p class="text-gray-500 mt-1">Suspicious activity detected. Session flagged as Bot.</p>
+            <button onclick="resetForm()" class="mt-6 w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Try Again</button>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "http://127.0.0.1:3000/predict";
+
+        // --- State and Tracker Initialization ---
+        let trackers = {};
+        let correctCaptcha = '';
+
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < 5; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            correctCaptcha = result;
+            document.getElementById('captcha-text').textContent = correctCaptcha;
+        }
+        
+        function initializeTrackers() {
+            trackers = {
+                startTime: Date.now(),
+                formFillStartTime: 0,
+                captchaStartTime: 0,
+                login_duration: Math.random() * 5 + 5,
+                journey_planner_duration: Math.random() * 2 + 1,
+                train_selection_duration: Math.random() * 5 + 3,
+                form_fill_duration: 0,
+                captcha_duration: 0,
+                session_duration: 0,
+                mouse_movements: 0,
+                page_scrolls: 0,
+                form_corrections: 0,
+                keystroke_timestamps: [],
+                avg_keystroke_interval_ms: 0,
+                mouse_idle_start_time: Date.now(),
+                mouse_idle_time_sec: 0,
+                backspace_count: 0,
+                account_age_days: Math.floor(Math.random() * 1000) + 30
+            };
+            generateCaptcha();
+            validateForm();
+        }
+
+        // --- Event Listeners for Behavioral Tracking ---
+        function startTracking() {
+            document.addEventListener('mousemove', () => {
+                trackers.mouse_movements++;
+                trackers.mouse_idle_time_sec += (Date.now() - trackers.mouse_idle_start_time) / 1000;
+                trackers.mouse_idle_start_time = Date.now();
+            });
+
+            window.addEventListener('scroll', () => trackers.page_scrolls++);
+
+            document.querySelectorAll('.form-input').forEach(input => {
+                input.addEventListener('keydown', (e) => {
+                    trackers.keystroke_timestamps.push(Date.now());
+                    if (e.key === 'Backspace') trackers.backspace_count++;
+                });
+                input.addEventListener('change', () => trackers.form_corrections++);
+                input.addEventListener('keyup', validateForm);
+            });
+
+            document.getElementById('passenger-details-section').addEventListener('focusin', () => {
+                if (trackers.formFillStartTime === 0) trackers.formFillStartTime = Date.now();
+            });
+            
+            document.getElementById('captcha-section').addEventListener('focusin', () => {
+                if (trackers.captchaStartTime === 0) trackers.captchaStartTime = Date.now();
+            });
+        }
+
+        // --- Form Validation ---
+        function validateForm() {
+            const name = document.getElementById('passenger-name').value;
+            const age = document.getElementById('passenger-age').value;
+            const captcha = document.getElementById('captcha-input').value;
+            const submitButton = document.getElementById('submit-button');
+
+            if (name.trim() !== '' && age.trim() !== '' && captcha.trim() !== '') {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        }
+
+        // --- Finalize Data and Call API ---
+        document.getElementById('submit-button').addEventListener('click', async () => {
+            if (document.getElementById('captcha-input').value !== correctCaptcha) {
+                alert('Invalid CAPTCHA. Please try again.');
+                generateCaptcha();
+                document.getElementById('captcha-input').value = '';
+                validateForm();
+                return;
+            }
+
+            document.getElementById('processing-modal').classList.remove('hidden');
+
+            const endTime = Date.now();
+            trackers.session_duration = (endTime - trackers.startTime) / 1000;
+            if (trackers.formFillStartTime > 0) trackers.form_fill_duration = (endTime - trackers.formFillStartTime) / 1000;
+            if (trackers.captchaStartTime > 0) trackers.captcha_duration = (endTime - trackers.captchaStartTime) / 1000;
+
+            if (trackers.keystroke_timestamps.length > 1) {
+                let intervals = [];
+                for (let i = 1; i < trackers.keystroke_timestamps.length; i++) {
+                    intervals.push(trackers.keystroke_timestamps[i] - trackers.keystroke_timestamps[i-1]);
+                }
+                trackers.avg_keystroke_interval_ms = intervals.reduce((a, b) => a + b, 0) / intervals.length;
+            }
+
+            const payload = {
+                login_duration: trackers.login_duration,
+                journey_planner_duration: trackers.journey_planner_duration,
+                train_selection_duration: trackers.train_selection_duration,
+                form_fill_duration: trackers.form_fill_duration,
+                captcha_duration: trackers.captcha_duration,
+                session_duration: trackers.session_duration,
+                mouse_movements: trackers.mouse_movements,
+                page_scrolls: trackers.page_scrolls,
+                form_corrections: trackers.form_corrections,
+                avg_keystroke_interval_ms: trackers.avg_keystroke_interval_ms,
+                mouse_idle_time_sec: trackers.mouse_idle_time_sec,
+                backspace_count: trackers.backspace_count,
+                account_age_days: trackers.account_age_days
+            };
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                document.getElementById('processing-modal').classList.add('hidden');
+                
+                if (!response.ok) {
+                    alert(`API Error: ${response.statusText}`);
+                    return;
+                }
+
+                const result = await response.json();
+                if (result.decision === "ALLOW") {
+                    document.getElementById('success-modal').classList.remove('hidden');
+                } else {
+                    document.getElementById('blocked-modal').classList.remove('hidden');
+                }
+
+            } catch (error) {
+                document.getElementById('processing-modal').classList.add('hidden');
+                alert(`Connection Error: Could not connect to the API. Is the backend server running?\n${error}`);
+            }
+        });
+
+        // --- Form Reset Logic ---
+        function resetForm() {
+            document.getElementById('success-modal').classList.add('hidden');
+            document.getElementById('blocked-modal').classList.add('hidden');
+            document.getElementById('passenger-name').value = '';
+            document.getElementById('passenger-age').value = '';
+            document.getElementById('captcha-input').value = '';
+            initializeTrackers();
+        }
+
+        // --- Initial Setup ---
+        window.onload = () => {
+            initializeTrackers();
+            startTracking();
+        };
+
+    </script>
+</body>
+</html>

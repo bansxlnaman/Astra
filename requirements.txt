@@ -1,0 +1,15 @@
+pandas
+numpy
+selenium
+webdriver-manager
+scikit-learn
+streamlit
+matplotlib
+seaborn
+joblib
+tqdm
+fastapi
+uvicorn
+pydantic
+plotly
+requests
