@@ -1,5 +1,4 @@
-# Astra: IRCTC Bot Detector 🇮🇳
-
+# Astra (Automated Script Threat Response & Analysis)
 A machine learning-based system to detect automated bots attempting to book IRCTC tickets, helping ensure fair access to railway tickets for genuine users.
 
 ## Project Overview
@@ -19,43 +18,19 @@ Astra uses behavioral analysis to distinguish between human users and automated 
 ```
 ASTRA/
 ├── data/
-│   └── tatkal.scv                 # Data for training 
+│   └── tatkal.csv               # Data for training 
 ├── models/                      # Trained ML models
-├── scripts/                     # model training scripts\
+│   ├── astra_model.joblib
+│   ├── astra_scaler.joblib  
+│   └── feature_columns.joblib        
+├── scripts/                     # model training scripts
 ├── src/
 │   ├── __init__.py
-│   ├── human_simulator.py    # Human behavior simulation
-│   ├── bot_simulator.py      # Bot behavior simulation
-│   └── generate_data.py      # Data generation script
-├── models/                    # Trained ML models
+│   ├── dashboard.py             # Dashboard for frontend
+│   ├── backend.py               # Backend
+│   └── simulation.py            # Data simulation script           
 ├── README.md
 └── requirements.txt
-```
-
-## Installation
-
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-## Usage
-
-### Data Generation
-```bash
-cd astra
-python src/generate_data.py
-```
-
-### Model Training
-1. Open `notebooks/01_EDA.ipynb` for data exploration
-2. Open `notebooks/02_Model_Training.ipynb` for model training
-
-### Interactive Demo
-```bash
-cd astra
-streamlit run app/app.py
 ```
 
 ## Technical Details
