@@ -36,7 +36,7 @@ ASTRA/
 ## Technical Details
 
 - **Language**: Python 3.8+
-- **ML Framework**: XGBoost, Scikit-learn
+- **ML Framework**: Random Forest Classifier, Scikit-learn
 - **Web Framework**: Streamlit
 - **Data Analysis**: Pandas, NumPy, Matplotlib, Seaborn
 - **Web Automation**: Selenium
